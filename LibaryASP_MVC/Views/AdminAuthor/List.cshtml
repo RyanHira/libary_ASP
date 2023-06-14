@@ -1,0 +1,43 @@
+﻿@model List<LibaryASP_MVC.Models.Domain.Author>
+
+@{
+}
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Show all Authors - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var author in Model)
+                {
+                    <tr>
+                        <td>@author.Id</td>
+                        <td>@author.Name</td>
+                        <td>
+                            <a asp-area="" 
+                             asp-controller="AdminAuthor" 
+                             asp-action="Edit"
+                             asp-route-id="@author.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Authors not found!</p>
+    }
+</div>
