@@ -18,6 +18,6 @@ namespace LibaryASP_MVC.Models.ViewModels
         //display author
         public IEnumerable<SelectListItem> Authors { get; set; }
         //collect Author
-        public string[] selectedAuthors { get; set; } = Array.Empty<string>();
+        public string[] SelectedAuthors { get; set; } = Array.Empty<string>();
     }
 }

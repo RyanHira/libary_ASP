@@ -1,5 +1,6 @@
 ﻿using LibaryASP_MVC.Data;
 using LibaryASP_MVC.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibaryASP_MVC.Repositories
 {
@@ -18,24 +19,54 @@ namespace LibaryASP_MVC.Repositories
 			return item;
 		}
 
-		public Task<Item?> DeleteAsync(Guid id)
+		public async Task<Item?> DeleteAsync(Guid id)
 		{
-			throw new NotImplementedException();
+			var existingItem = await libaryDbContext.Items.FindAsync(id);
+			if (existingItem != null)
+			{
+				libaryDbContext.Items.Remove(existingItem);
+				await libaryDbContext.SaveChangesAsync();
+				return existingItem;
+			}
+
+			return null;
 		}
 
-		public Task<IEnumerable<Item>> GetAllAsync()
+		public async Task<IEnumerable<Item>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			return await libaryDbContext.Items.Include(x => x.Authors).ToListAsync();
+
 		}
 
-		public Task<Item?> GetAsync(Guid id)
+		public async Task<Item?> GetAsync(Guid id)
 		{
-			throw new NotImplementedException();
+			return await libaryDbContext.Items.Include(x => x.Authors).FirstOrDefaultAsync(x => x.Id == id);
 		}
 
-		public Task<Item?> UpdateAsync(Item item)
+		public async Task<Item?> UpdateAsync(Item item)
 		{
-			throw new NotImplementedException();
+			var existingItem = await libaryDbContext.Items.Include(x => x.Authors).
+				FirstOrDefaultAsync(x => x.Id == item.Id);
+			if (existingItem != null)
+			{
+				existingItem.Id = item.Id;
+				existingItem.Title = item.Title;
+				existingItem.Content = item.Content;
+				existingItem.Shortdescription = item.Shortdescription;
+				existingItem.FeatureImageUrl = item.FeatureImageUrl;
+				existingItem.UrlHandle = item.UrlHandle;
+				existingItem.Genre = item.Genre;
+				existingItem.Amount = item.Amount;
+				existingItem.ReleaseDate = item.ReleaseDate;
+				existingItem.Location = item.Location;
+				existingItem.Visible = item.Visible;
+				existingItem.Authors = item.Authors;
+
+				await libaryDbContext.SaveChangesAsync();
+				return existingItem;
+
+			}
+			return null;
 		}
 	}
 }
