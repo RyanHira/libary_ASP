@@ -73,3 +73,5 @@ C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\obj\Debug\net7.0\refint\
 C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\obj\Debug\net7.0\LibaryASP_MVC.pdb
 C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\obj\Debug\net7.0\LibaryASP_MVC.genruntimeconfig.cache
 C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\obj\Debug\net7.0\ref\LibaryASP_MVC.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\CloudinaryDotNet.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Newtonsoft.Json.dll

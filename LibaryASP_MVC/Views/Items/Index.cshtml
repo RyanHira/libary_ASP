@@ -1,0 +1,42 @@
+﻿@model LibaryASP_MVC.Models.Domain.Item
+@{
+    ViewData["Title"] = Model.Title;
+}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+
+            @if (Model != null)
+            {
+                <h1 class="mb-3">@Model.Title</h1>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-secondary">@Model.Genre</span>
+                    <span class="text-secondary">@Model.ReleaseDate.ToShortDateString()</span>
+                </div>
+
+               
+
+              
+                <div class="mb-3 d-flex">
+                    @foreach (var author in Model.Authors)
+                    {
+                        <span class="badge bg-secondary me-1">@author.Name</span>
+                    }
+                </div>
+
+                <img src="@Model.FeatureImageUrl" class="d-block img-fluid mb-3" />
+
+                <div class="mb-3 blog-details-content">
+                    @Html.Raw(Model.Content)
+                </div>
+
+
+            }
+            else
+            {
+                <p>Blog post not found!</p>
+            }
+        </div>
+    </div>
+</div>

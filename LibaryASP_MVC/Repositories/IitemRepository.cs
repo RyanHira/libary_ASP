@@ -14,5 +14,7 @@ namespace LibaryASP_MVC.Repositories
 		Task<Item?> UpdateAsync(Item item);
 
 		Task<Item?> DeleteAsync(Guid id);
+
+		Task<Item?> GetByUrlHandleAsync(string urlHandle);
 	}
 }

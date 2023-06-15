@@ -43,7 +43,13 @@ namespace LibaryASP_MVC.Repositories
 			return await libaryDbContext.Items.Include(x => x.Authors).FirstOrDefaultAsync(x => x.Id == id);
 		}
 
-		public async Task<Item?> UpdateAsync(Item item)
+        public async Task<Item?> GetByUrlHandleAsync(string urlHandle)
+        {
+            return await libaryDbContext.Items.Include(x => x.Authors).FirstOrDefaultAsync(x =>x.UrlHandle == urlHandle);
+
+        }
+
+        public async Task<Item?> UpdateAsync(Item item)
 		{
 			var existingItem = await libaryDbContext.Items.Include(x => x.Authors).
 				FirstOrDefaultAsync(x => x.Id == item.Id);

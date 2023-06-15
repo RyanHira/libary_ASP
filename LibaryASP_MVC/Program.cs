@@ -20,6 +20,10 @@ namespace LibaryASP_MVC
 
 			builder.Services.AddScoped<IitemRepository, ItemRepository>();
 
+			builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository > ();
+
+
+
 			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
