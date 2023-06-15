@@ -1,6 +1,7 @@
 ﻿using LibaryASP_MVC.Data;
 using LibaryASP_MVC.Models.Domain;
 using LibaryASP_MVC.Models.ViewModels;
+using LibaryASP_MVC.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,19 +9,19 @@ namespace LibaryASP_MVC.Controllers
 {
     public class AdminAuthorController : Controller
     {
-        private readonly LibaryDbContext libaryDbContext;
+		private readonly IAuthorRepository authorRepository;
 
-        public AdminAuthorController(LibaryDbContext libaryDbContext)
+		public AdminAuthorController(IAuthorRepository authorRepository)
         {
-            this.libaryDbContext = libaryDbContext;
-        }
+			this.authorRepository = authorRepository;
+		}
 
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
-
+        //add
         [HttpPost]
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddAuthorRequest addAuthorRequest)
@@ -31,8 +32,8 @@ namespace LibaryASP_MVC.Controllers
                 Name = addAuthorRequest.Name
             };
 
-            await libaryDbContext.Authors.AddAsync(author);
-            await libaryDbContext.SaveChangesAsync();
+            await authorRepository.AddAsync(author);
+           
 
             return RedirectToAction("List");
         }
@@ -41,20 +42,15 @@ namespace LibaryASP_MVC.Controllers
         public async Task<IActionResult> List() 
         {
             //use dbcontext om de author te lezen
-            var author = await libaryDbContext.Authors.ToListAsync();
-
+            var author = await authorRepository.GetAllAsync();
+        
             return View(author);    
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id) 
         {
-            //1st method
-            //var author = libaryDbContext.Authors.Find(id);
-            
-            //2dn method
-            var author = await libaryDbContext.Authors.FirstOrDefaultAsync(x => x.Id == id);
-
+            var author = await authorRepository.GetAsync(id);
             if (author != null) 
             {
                 var editAuthorRequest = new EditAuthorRequest
@@ -78,31 +74,27 @@ namespace LibaryASP_MVC.Controllers
                 Name = editAuthorRequest.Name
             };
 
-            var existingAuthor = await libaryDbContext.Authors.FindAsync(author.Id);
-
-            if (existingAuthor != null) 
-            {
-                existingAuthor.Name = author.Name;
-                //save 
-                await libaryDbContext.SaveChangesAsync();
+            var updatedAuthor = await authorRepository.UpdateAsync(author);
+           
+            if (updatedAuthor != author) 
+            { 
                 //show succes note
-                return RedirectToAction("Edit", new { id = editAuthorRequest.Id });
             }
-            //show error noti
+            else
+            {
+                //show error note
+            }
             return RedirectToAction("Edit", new { id = editAuthorRequest.Id });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(EditAuthorRequest editAuthorRequest)
         {
-            var author = await libaryDbContext.Authors.FindAsync(editAuthorRequest.Id);
+            var deleted = await authorRepository.DeleteAsync(editAuthorRequest.Id);
 
-            if (author != null) 
+            if(deleted != null) 
             {
-                libaryDbContext.Authors.Remove(author);
-                await libaryDbContext.SaveChangesAsync();
-
-                //succes noti
+                //show scucces
                 return RedirectToAction("List");
             }
             //show error noti

@@ -1,4 +1,5 @@
 using LibaryASP_MVC.Data;
+using LibaryASP_MVC.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibaryASP_MVC
@@ -15,7 +16,11 @@ namespace LibaryASP_MVC
             builder.Services.AddDbContext<LibaryDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("LibaryDbConnectionString")));
 
-            var app = builder.Build();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+
+			builder.Services.AddScoped<IitemRepository, ItemRepository>();
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
