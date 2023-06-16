@@ -6,9 +6,6 @@ Dit project gaat over bibliotheek applicatie, waar een gebruiker zich kan aanmel
 - [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Intro
 Dit project gaat over bibliotheek applicatie, waar een gebruiker zich kan aanmelden en boeken kan lenen.
