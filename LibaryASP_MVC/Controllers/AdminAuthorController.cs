@@ -2,12 +2,14 @@
 using LibaryASP_MVC.Models.Domain;
 using LibaryASP_MVC.Models.ViewModels;
 using LibaryASP_MVC.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibaryASP_MVC.Controllers
 {
-    public class AdminAuthorController : Controller
+	[Authorize(Roles = "Admin")]
+	public class AdminAuthorController : Controller
     {
 		private readonly IAuthorRepository authorRepository;
 
@@ -16,6 +18,7 @@ namespace LibaryASP_MVC.Controllers
 			this.authorRepository = authorRepository;
 		}
 
+        
         [HttpGet]
         public IActionResult Add()
         {

@@ -1,12 +1,14 @@
 ﻿using LibaryASP_MVC.Models.Domain;
 using LibaryASP_MVC.Models.ViewModels;
 using LibaryASP_MVC.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace LibaryASP_MVC.Controllers
 {
+	[Authorize(Roles = "Admin")]
 	public class AdminItemController : Controller
 	{
 		private readonly IAuthorRepository authorRepository;

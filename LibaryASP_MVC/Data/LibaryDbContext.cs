@@ -5,7 +5,7 @@ namespace LibaryASP_MVC.Data
 {
     public class LibaryDbContext : DbContext
     {
-        public LibaryDbContext(DbContextOptions options) : base(options)
+        public LibaryDbContext(DbContextOptions<LibaryDbContext> options) : base(options)
         {
         }
 

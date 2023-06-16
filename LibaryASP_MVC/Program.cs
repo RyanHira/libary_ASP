@@ -1,5 +1,6 @@
 using LibaryASP_MVC.Data;
 using LibaryASP_MVC.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibaryASP_MVC
@@ -15,6 +16,23 @@ namespace LibaryASP_MVC
 
             builder.Services.AddDbContext<LibaryDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("LibaryDbConnectionString")));
+
+            builder.Services.AddDbContext<AuthDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("LibaryAuthDbConnectionString")));
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                //default settings
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+               
+            });
 
             builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
@@ -38,6 +56,8 @@ namespace LibaryASP_MVC
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

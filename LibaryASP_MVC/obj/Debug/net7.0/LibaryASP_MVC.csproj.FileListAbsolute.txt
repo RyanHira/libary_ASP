@@ -75,3 +75,9 @@ C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\obj\Debug\net7.0\LibaryA
 C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\obj\Debug\net7.0\ref\LibaryASP_MVC.dll
 C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\CloudinaryDotNet.dll
 C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\ryanh\source\repos\LibaryASP_MVC\LibaryASP_MVC\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
